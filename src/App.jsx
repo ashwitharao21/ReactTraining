@@ -2,6 +2,7 @@ import './App.css'
 import Card from './card';
 import CardA from './cardA';
 import Form from './Form';
+import Hooks from './Hooks';
 
 function App(){
   const employees = [
@@ -10,22 +11,34 @@ function App(){
     {name: 'Meghana', role: 'Full stack Developer'},
     {name: 'Manju', role: 'Full stack Developer'},
     {name: 'Shivu', role: 'Full stack Developer'},
+  ];
+  const shouldShow = true;
 
-  ]
-  function changeHandler(event){
-    console.log(event.target.value);
-}
+//   function changeHandler(event){
+//     console.log(event.target.value);
+// }
   return (
    <div>
-      <h1>Hello World</h1>
+     {/* condition with else option */}
+      { shouldShow ? <h1>Hello World</h1> : "" }
+     {/* there is no else condition */}
+      { shouldShow && <h1>Hello World</h1> }
+
       {/* <Card name="Ashwitha" role="Full Stack Developer"/> */}
       {/* <CardA /> */}
+      {/* sol 1 */}
       {employees.map((e) => (
-        <Card name={e.name} role={e.role} />
+        e.name != 'Meghana' ? <Card name={e.name} role={e.role} /> : ''
+      ))}
+      <p>Best Approach</p>
+      {/* sol 2 */}
+      {employees.filter(e => e.name != 'Meghana').map((e) => (
+        e.name != 'Meghana' ? <Card name={e.name} role={e.role} /> : ''
       ))}
 
       {/* <input onChange={changeHandler} type="text" /> */}
       <Form />
+      <Hooks />
    </div>
   )
 }
